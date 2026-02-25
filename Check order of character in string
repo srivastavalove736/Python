@@ -1,0 +1,16 @@
+from collections
+import OrderedDict
+s = 'engineers rock'
+p = 'er'
+od = OrderedDict()
+for i, ch in enumerate(s):
+    if ch not in od:
+        od[ch] = i
+pos = -1
+for ch in p:
+    if ch not in od or od[ch] < pos:
+        print(False)
+        break
+    pos = od[ch]
+else:
+    print(True)
