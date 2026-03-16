@@ -1,0 +1,24 @@
+import time
+s = time.perf_counter()
+l = s
+lap = 1
+
+print("Press ENTER to record laps.\nPress CTRL+C to stop")
+
+try:
+    while True:
+        input()
+        cur = time.perf_counter()
+        lt  = round(cur - l, 4)
+        tt = round(cur - s, 4)
+        
+        print("Lap No.:", lap)
+        print("Total Time:", tt)
+        print("Lap Time:", lt)
+        print("*" * 20)
+
+        l = cur
+        lap += 1
+
+except KeyboardInterrupt:
+    print("Done")
