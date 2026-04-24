@@ -1,0 +1,8 @@
+import seaborn
+import matplotlib.pyplot as plt
+
+df = seaborn.load_dataset('tips')
+
+graph = seaborn.FacetGrid(df, row ='smoker', col ='time')
+graph.map(plt.hist, 'total_bill', bins = 15, color ='orange')
+plt.show()
