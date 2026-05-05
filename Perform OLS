@@ -1,0 +1,11 @@
+plt.scatter(data['x'], data['y'], color='blue', label='Data Points')
+
+x_range = np.linspace(data['x'].min(), data['x'].max(), 100)
+y_pred = result.params[0] + result.params[1] * x_range 
+
+plt.plot(x_range, y_pred, color='red', label='Regression Line')
+plt.xlabel('Independent Variable (X)')
+plt.ylabel('Dependent Variable (Y)')
+plt.title('OLS Regression Fit')
+plt.legend()
+plt.show()
