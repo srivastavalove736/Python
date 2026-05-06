@@ -1,0 +1,24 @@
+import numpy as np
+from statsmodels.sandbox.regression.gmm import GMM
+
+np.random.seed(42)
+n = 100
+x = np.random.normal(size=n)
+beta_0 = 1.0
+beta_1 = 2.0
+epsilon = np.random.normal(scale=1.0, size=n)
+y = beta_0 + beta_1 * x + epsilon
+
+instruments = np.column_stack((np.ones(n), x))
+class LinearGMM(GMM):
+    def momcond(self, params):
+        y_hat = params[0] + params[1] * self.exog[:, 1]
+        error = self.endog - y_hat
+        return error[:, None] * self.instrument
+
+exog = np.column_stack((np.ones(n), x))
+
+model = LinearGMM(y, exog, instruments)
+results = model.fit(start_params=[0, 0], maxiter=2)
+print("Estimated parameters:", results.params)
+print("Standard errors:", results.bse)
